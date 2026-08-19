@@ -27,8 +27,12 @@ const Nav = () => {
             <li style={{listStyle:"none"}}>
                 <Link to={"/about"} style={{textDecoration:'none', color:'#222'}}>About</Link>
             </li>
-            <li style={{listStyle:"none"}}>Products</li>
-            <li style={{listStyle:"none"}}>Create Product</li>
+            <li style={{listStyle:"none"}}>
+                  <Link to={"/product"} style={{textDecoration:'none', color:'#222'}}>Product</Link>
+            </li>
+            <li style={{listStyle:"none"}}>
+                  <Link to={"/create-product"} style={{textDecoration:'none', color:'#222'}}>Create product</Link>
+            </li>
             <li style={{listStyle:"none"}}>Blog</li>
           </ul>
         </div>
