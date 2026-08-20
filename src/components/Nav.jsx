@@ -28,7 +28,7 @@ const Nav = () => {
                 <Link to={"/about"} style={{textDecoration:'none', color:'#222'}}>About</Link>
             </li>
             <li style={{listStyle:"none"}}>
-                  <Link to={"/product"} style={{textDecoration:'none', color:'#222'}}>Product</Link>
+                  <Link to={"/product"} style={{textDecoration:'none', color:'#815a5a'}}>Product</Link>
             </li>
             <li style={{listStyle:"none"}}>
                   <Link to={"/create-product"} style={{textDecoration:'none', color:'#222'}}>Create product</Link>
