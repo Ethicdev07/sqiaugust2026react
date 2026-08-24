@@ -2,6 +2,11 @@ import React from "react";
 
 import { useNavigate, Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+
+import { Moon } from "lucide-react"
+
 const Nav = () => {
 
     const navigate = useNavigate();
@@ -36,6 +41,8 @@ const Nav = () => {
             <li style={{listStyle:"none"}}>Blog</li>
           </ul>
         </div>
+
+        <Moon/>
 
         <div>
             <div></div>
