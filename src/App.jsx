@@ -6,7 +6,10 @@ import Signup from "./pages/Signup";
 import Nav from "./components/Nav";
 import Landingpage from "./pages/Landingpage";
 import Counter from "./hooks/Counter";
-import Createproduct from "./pages/Createproduct"
+import Createproduct from "./pages/Createproduct";
+import Timer from "./hooks/Timer"
+
+import Products from "./pages/Products";
 
 const App = () => {
   return (
@@ -17,13 +20,15 @@ const App = () => {
           <Route path="/" element={<Landingpage/>}/>
           <Route path="/about" element={<About />} />
           <Route path="/create-product" element={<Createproduct/>}/>
-
+          <Route path="/product" element={<Products/>}/>
           <Route path="/login" element={<Login />} />
 
           <Route path="/signup" element={<Signup />} />
         </Routes>
 
-         <Counter/>
+         {/* <Counter/> */}
+          {/* <Timer/> */}
+         
       </Router>
     </>
   );
