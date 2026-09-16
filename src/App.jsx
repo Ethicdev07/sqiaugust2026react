@@ -10,6 +10,8 @@ import Createproduct from "./pages/Createproduct";
 import Timer from "./hooks/Timer"
 
 import Products from "./pages/Products";
+import List from "./hooks/List";
+import Greeting from "./components/Greeting";
 
 const App = () => {
   return (
@@ -28,6 +30,10 @@ const App = () => {
 
          {/* <Counter/> */}
           {/* <Timer/> */}
+
+          {/* <List/> */}
+
+          {/* <Greeting username="Taye" userAge={true}/> */}
          
       </Router>
     </>

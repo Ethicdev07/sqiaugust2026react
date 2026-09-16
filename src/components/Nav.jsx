@@ -2,10 +2,8 @@ import React from "react";
 
 import { useNavigate, Link } from "react-router-dom";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-
 import { Moon } from "lucide-react"
+import AppButton from "./AppButton";
 
 const Nav = () => {
 
@@ -41,13 +39,26 @@ const Nav = () => {
             <li style={{listStyle:"none"}}>Blog</li>
           </ul>
         </div>
+        
 
-        <Moon/>
+        {/* <Moon/> */}
 
-        <div>
-            <div></div>
-            <button onClick={handleSignUp}>singup</button>
-            <button onClick={handleLogin}>login</button>
+        <div style={{display:"flex", gap: "1em"}}>
+           <AppButton
+            text="Login"
+            // textColor="blue"
+            bgColor="white"
+            useBorder="5px"
+           
+           />
+
+          <AppButton 
+          text="Signup"
+          bgColor="blue"
+          textColor="white"
+          useBorder="5px"
+          
+          />
         </div>
       </nav>
     </header>
