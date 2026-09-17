@@ -1,40 +1,51 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Nav from "./components/Nav";
 import Landingpage from "./pages/Landingpage";
-import Counter from "./hooks/Counter";
 import Createproduct from "./pages/Createproduct";
-import Timer from "./hooks/Timer"
 
 import Products from "./pages/Products";
-import List from "./hooks/List";
-import Greeting from "./components/Greeting";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const App = () => {
   return (
     <>
       <Router>
-       <Nav/>
-        <Routes>
-          <Route path="/" element={<Landingpage/>}/>
-          <Route path="/about" element={<About />} />
-          <Route path="/create-product" element={<Createproduct/>}/>
-          <Route path="/product" element={<Products/>}/>
-          <Route path="/login" element={<Login />} />
+        <AuthProvider>
+          <Nav/>
+          <Routes>
+            <Route path="/" element={<Landingpage/>}/>
+            <Route path="/about" element={<About />} />
+            <Route path="/create-product" element={<Createproduct/>}/>
+            <Route path="/product" element={<Products/>}/>
+            <Route path="/login" element={<Login />} />
 
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
 
-         {/* <Counter/> */}
-          {/* <Timer/> */}
+          <ToastContainer
+            position="top-right"
+            autoClose={2500}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            toastClassName="appToast"
+            bodyClassName="appToastBody"
+            progressClassName="appToastProgress"
+          />
 
-          {/* <List/> */}
-
-          {/* <Greeting username="Taye" userAge={true}/> */}
-         
+        
+        </AuthProvider>
       </Router>
     </>
   );

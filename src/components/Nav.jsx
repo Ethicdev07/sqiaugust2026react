@@ -49,6 +49,7 @@ const Nav = () => {
             // textColor="blue"
             bgColor="white"
             useBorder="5px"
+            handleClick={handleLogin}
            
            />
 
@@ -57,6 +58,7 @@ const Nav = () => {
           bgColor="blue"
           textColor="white"
           useBorder="5px"
+          handleClick={handleSignUp}
           
           />
         </div>
