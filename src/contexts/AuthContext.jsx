@@ -67,28 +67,133 @@ export const AuthProvider = ({children})=>{
             });
 
 
+
+            setToken(res.data.data.token);
+            setUser(res.data.data.user);
+
+            localStorage.setItem("token", res.data.data.token);
+            localStorage.setItem("user", JSON.stringify(res.data.data.user));
+
+            toast.success("Login successful");
+            navigate("/");
+
+
             
         } catch (error) {
              const message = error?.response?.data?.message || "Login failed. Please try again.";
             toast.error(message);
             throw error;
+        } finally {
+            setLoading(false);
         }
     };
 
-    const verifyEmail = async(data)=>{
+    const logout = ()=>{
+        setToken(null);
+        setUser(null);
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        toast.success("Logged out successfully");
+        navigate("/login");
+    };
+
+    const verifyEmail = async(email, verificationToken)=>{
+        setLoading(true);
         try {
-            const res = await axios.get(`${apiUrl}/auth/verify/:email/:verificationToken`, data, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            
+            const res = await axios.get(
+                `${apiUrl}/auth/verify/${email}/${verificationToken}`,
+            );
+
+            toast.success(res.data.message || "Email verified successfully");
+            navigate("/login");
+
+            return res.data;
         } catch (error) {
-            
+            const message = error?.response?.data?.message || "Email verification failed. Please try again.";
+            toast.error(message);
+            throw error;
+        } finally {
+            setLoading(false);
         }
     }
 
+    const updateProfile = async(data)=>{
+        setLoading(true);
+        try {
+            const res = await axios.patch(`${apiUrl}/users/profile`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
+            setUser(res.data.data.user);
+            localStorage.setItem("user", JSON.stringify(res.data.data.user));
+
+            toast.success(res.data.message || "Profile updated successfully");
+
+            return res.data;
+        } catch (error) {
+            const message = error?.response?.data?.message || "Profile update failed. Please try again.";
+            toast.error(message);
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const updateProfilePicture = async(file)=>{
+        setLoading(true);
+        try {
+            const formData = new FormData();
+            formData.append("profile_image", file);
+
+            const res = await axios.patch(
+                `${apiUrl}/users/update-profile-picture`,
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
+            );
+
+            setUser(res.data.data.user);
+            localStorage.setItem("user", JSON.stringify(res.data.data.user));
+
+            toast.success(res.data.message || "Profile picture updated successfully");
+
+            return res.data;
+        } catch (error) {
+            const message = error?.response?.data?.message || "Profile picture update failed. Please try again.";
+            toast.error(message);
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const updatePassword = async(data)=>{
+        setLoading(true);
+        try {
+            const res = await axios.patch(`${apiUrl}/users/updatepassword`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            toast.success(res.data.message || "Password updated successfully");
+
+            return res.data;
+        } catch (error) {
+            const message = error?.response?.data?.message || "Password update failed. Please try again.";
+            toast.error(message);
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const values = {
         loading,
@@ -96,7 +201,11 @@ export const AuthProvider = ({children})=>{
         user,
         signUp,
         login,
-        verifyEmail
+        logout,
+        verifyEmail,
+        updateProfile,
+        updateProfilePicture,
+        updatePassword
     };
 
 

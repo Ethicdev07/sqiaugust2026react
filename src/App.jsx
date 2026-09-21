@@ -11,6 +11,8 @@ import Landingpage from "./pages/Landingpage";
 import Createproduct from "./pages/Createproduct";
 
 import Products from "./pages/Products";
+import VerifyEmail from "./pages/VerifyEmail";
+import Profile from "./pages/Profile";
 import { AuthProvider } from "./contexts/AuthContext";
 
 const App = () => {
@@ -27,6 +29,8 @@ const App = () => {
             <Route path="/login" element={<Login />} />
 
             <Route path="/signup" element={<Signup />} />
+            <Route path="/verify/:email/:verificationToken" element={<VerifyEmail />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
 
           <ToastContainer

@@ -4,10 +4,12 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { Moon } from "lucide-react"
 import AppButton from "./AppButton";
+import { useAuth } from "../contexts/AuthContext";
 
 const Nav = () => {
 
     const navigate = useNavigate();
+    const { token, user, logout } = useAuth();
 
     const handleSignUp = ()=>{
         navigate("/signup")
@@ -39,29 +41,54 @@ const Nav = () => {
             <li style={{listStyle:"none"}}>Blog</li>
           </ul>
         </div>
+
+       
         
 
         {/* <Moon/> */}
 
-        <div style={{display:"flex", gap: "1em"}}>
-           <AppButton
-            text="Login"
-            // textColor="blue"
-            bgColor="white"
-            useBorder="5px"
-            handleClick={handleLogin}
-           
-           />
+        {token && user ? (
+          <div style={style.profileGroup}>
+            <Link to={"/profile"} style={style.profileLink}>
+              <span style={style.firstname}>Welcome, {user.firstname}</span>
 
-          <AppButton 
-          text="Signup"
-          bgColor="blue"
-          textColor="white"
-          useBorder="5px"
-          handleClick={handleSignUp}
-          
-          />
-        </div>
+              {user.profile_image ? (
+                <img src={user.profile_image} alt={user.firstname} style={style.avatarImage} />
+              ) : (
+                <div style={style.avatarFallback}>
+                  {user.firstname?.charAt(0).toUpperCase()}
+                </div>
+              )}
+            </Link>
+
+            <AppButton
+              text="Logout"
+              bgColor="white"
+              useBorder="5px"
+              handleClick={logout}
+            />
+          </div>
+        ) : (
+          <div style={{display:"flex", gap: "1em"}}>
+             <AppButton
+              text="Login"
+              // textColor="blue"
+              bgColor="white"
+              useBorder="5px"
+              handleClick={handleLogin}
+             
+             />
+
+            <AppButton 
+            text="Signup"
+            bgColor="blue"
+            textColor="white"
+            useBorder="5px"
+            handleClick={handleSignUp}
+            
+            />
+          </div>
+        )}
       </nav>
     </header>
   );
@@ -72,7 +99,42 @@ const style = {
     header: {
         backgroundColor: '#E8E8E8',
         boxShadow: '0px 2px 3px 3px grey'
-    }
+    },
+    profileGroup: {
+        display: "flex",
+        alignItems: "center",
+        gap: "0.8em",
+    },
+    profileLink: {
+        display: "flex",
+        alignItems: "center",
+        gap: "0.6em",
+        textDecoration: "none",
+        color: "#222",
+    },
+    avatarImage: {
+        width: "40px",
+        height: "40px",
+        borderRadius: "50%",
+        objectFit: "cover",
+        border: "2px solid blue",
+    },
+    avatarFallback: {
+        width: "40px",
+        height: "40px",
+        borderRadius: "50%",
+        backgroundColor: "blue",
+        color: "white",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontWeight: 600,
+        fontSize: "16px",
+    },
+    firstname: {
+        fontWeight: 600,
+        color: "#222",
+    },
 }
 
 export default Nav;
