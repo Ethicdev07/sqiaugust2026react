@@ -20,10 +20,10 @@ const Nav = () => {
     }
   return (
     <header style={style.header}>
-      <nav style={{display: "flex", justifyContent: 'space-around', alignItems:'center', padding: '15px'}}>
+      <nav className="flex justify-around items-center p-5">
         <div style={{display:"flex", gap:"4em", alignItems: 'center'}}>
           
-          <Link to={"/"} style={{textDecoration:'none', color:"blue"}}>
+          <Link to={"/"} className="text-blue-700 text-2xl">
               <h1>AugEcommerce</h1>
           </Link>
           
