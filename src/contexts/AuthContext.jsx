@@ -17,7 +17,9 @@ export const AuthProvider = ({children})=>{
 
     const navigate = useNavigate();
 
-    const apiUrl = import.meta.env.VITE_API_URL
+    const apiUrl = import.meta.env.VITE_API_URL;
+    console.log(apiUrl);
+    
 
     const [loading, setLoading] = useState(false);
     const [token, setToken] = useState(() => localStorage.getItem("token"));
@@ -32,6 +34,8 @@ export const AuthProvider = ({children})=>{
 
     const signUp = async(data)=>{
         setLoading(true);
+        console.log(apiUrl);
+        
         try {
             const res = await axios.post(`${apiUrl}/auth/signup`, data, {
                 headers: {
