@@ -34,13 +34,13 @@ export const AuthProvider = ({children})=>{
 
     const signUp = async(data)=>{
         setLoading(true);
-        console.log(apiUrl);
         
         try {
             const res = await axios.post(`${apiUrl}/auth/signup`, data, {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                timeout: 15000,
             });
 
             setToken(res.data.data.token);
@@ -52,7 +52,11 @@ export const AuthProvider = ({children})=>{
             toast.success("Signup successful");
             navigate("/login");
         } catch (error) {
-            const message = error?.response?.data?.message || "Signup failed. Please try again.";
+            const message =
+                error?.response?.data?.message ||
+                (error.code === "ECONNABORTED"
+                    ? "Signup is taking too long. Please try again."
+                    : "Signup failed. Please try again.");
             toast.error(message);
             throw error;
         } finally {
